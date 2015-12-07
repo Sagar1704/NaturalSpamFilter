@@ -5,5 +5,5 @@ package nlp.seastar.spamfilter.data;
  *
  */
 public interface Tester {
-	public void test();
+	public void test(Data data);
 }
