@@ -48,20 +48,18 @@ public class Hypernymy extends SemanticFeatures implements Trainer, Tester {
 				System.out.print("\nTest result for directory: " + directory.getName());
 				for (File file : files) {
 					Email email = new Email();
-					email.computeTokens(file);
-					for (String token : email.getEmailTokens()) {
+					email.setEmailParameters(1, file);
+					for (String token : email.getEmailNgrams()) {
 						Word word = new Word(token);
 						if (!word.isSpecialCharacter()) {
-							if (!dictionary.containsKey(word.getWord().trim())) {
-								word.setHamCount(1);
-								word.setSpamCount(1);
-								getHypernyms(word, dictionary);
-								setAverageCount(word);
-								word.computeProbability(data);
-								email.adjustProbability(word.getHamProbability(),
-										word.getSpamProbability());
-								dictionary.put(token, word);
+							if (dictionary.containsKey(word.getWord().trim())) {
+								word = dictionary.get(word.getWord().trim());
 							}
+							getHypernyms(word, dictionary);
+							setAverageCount(word);
+							word.computeProbability(data);
+							email.adjustProbability(word.getHamProbability(),
+									word.getSpamProbability());
 						}
 					}
 					email.adjustProbability(data.getPriorHamProbability(),
