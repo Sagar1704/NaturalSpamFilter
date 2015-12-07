@@ -38,8 +38,8 @@ public class Baseline implements Trainer, Tester {
 					isHam = true;
 				else
 					isHam = false;
-				File directoryPath = new File(data.getTrainingDirectory()
-						+ "\\" + directory.getName());
+				File directoryPath = new File(
+						data.getTrainingDirectory() + "\\" + directory.getName());
 				File[] files = directoryPath.listFiles();
 				for (File file : files) {
 					Email email = new Email();
@@ -59,7 +59,6 @@ public class Baseline implements Trainer, Tester {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -71,11 +70,10 @@ public class Baseline implements Trainer, Tester {
 			for (File directory : directories) {
 				int testHamCount = 0;
 				int testSpamCount = 0;
-				File directoryPath = new File(data.getTestingDirectory() + "\\"
-						+ directory.getName());
+				File directoryPath = new File(
+						data.getTestingDirectory() + "\\" + directory.getName());
 				File[] files = directoryPath.listFiles();
-				System.out.print("\nTest result for directory: "
-						+ directory.getName());
+				System.out.print("\nTest result for directory: " + directory.getName());
 				for (File file : files) {
 					Email email = new Email();
 					email.computeTokens(file);
@@ -86,11 +84,9 @@ public class Baseline implements Trainer, Tester {
 							if (dictionary.containsKey(word.getWord().trim())) {
 								word = dictionary.get(word.getWord().trim());
 							}
-							if (lexical == null
-									|| !lexical.isStopWord(word.getWord())) {
+							if (lexical == null || !lexical.isStopWord(word.getWord())) {
 								word.computeProbability(data);
-								email.adjustProbability(
-										word.getHamProbability(),
+								email.adjustProbability(word.getHamProbability(),
 										word.getSpamProbability());
 							}
 						}
@@ -102,19 +98,16 @@ public class Baseline implements Trainer, Tester {
 					} else {
 						testSpamCount++;
 					}
-
 				}
-				System.out.print("\n\n Classified " + testSpamCount
-						+ " as Spam\n Classified  " + testHamCount
-						+ " as Ham\n Accuracy = ");
+				System.out.print("\n\n Classified " + testSpamCount + " as Spam\n Classified  "
+						+ testHamCount + " as Ham\n Accuracy = ");
 				if (directory.getName().equals("spam"))
-					System.out.print((double) (testSpamCount * 100)
-							/ (testSpamCount + testHamCount) + " %");
+					System.out.print(
+							(double) (testSpamCount * 100) / (testSpamCount + testHamCount) + " %");
 				else
-					System.out.print((double) (testHamCount * 100)
-							/ (testSpamCount + testHamCount) + " %");
+					System.out.print(
+							(double) (testHamCount * 100) / (testSpamCount + testHamCount) + " %");
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -123,15 +116,10 @@ public class Baseline implements Trainer, Tester {
 	public static void main(String[] args) {
 		String trainingDirectory = args[0];
 		String testDirectory = args[1];
-		try {
-			System.out.print("\n\n#### NAIVE BAYES CLASSIFIER ####\n\n");
-			Baseline bayes = new Baseline(2, true);
-			Data data = new Data(trainingDirectory, testDirectory);
-			bayes.train(data);
-			bayes.test(data);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		System.out.print("\n\n#### NAIVE BAYES CLASSIFIER ####\n\n");
+		Baseline bayes = new Baseline(2, true);
+		Data data = new Data(trainingDirectory, testDirectory);
+		bayes.train(data);
+		bayes.test(data);
 	}
-
 }

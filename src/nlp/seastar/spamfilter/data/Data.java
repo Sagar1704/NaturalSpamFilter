@@ -20,19 +20,15 @@ public class Data {
 	private HashMap<String, Word> dictionary;
 
 	public Data(String trainingDirectory, String testDirectory) {
-		this.trainingDirectory = trainingDirectory;
-		this.testingDirectory = testDirectory;
-		numOfSpamEmails = 0;
-		numOfHamEmails = 0;
-		numOfHamWords = 0;
-		numOfSpamWords = 0;
-		this.priorHamProbability = 0.0;
-		this.priorSpamProbablity = 0.0;
-		/*
-		 * tokens = new ArrayList<String>(); ngramList = new
-		 * ArrayList<String>();
-		 */
-		dictionary = new HashMap<String, Word>();
+		this.setTrainingDirectory(trainingDirectory);
+		this.setTestingDirectory(testDirectory);
+		this.setNumOfSpamEmails(0);
+		this.setNumOfHamEmails(0);
+		this.setNumOfHamWords(0);
+		this.setNumOfSpamWords(0);
+		this.setPriorHamProbability(0.0);
+		this.setPriorSpamProbablity(0.0);
+		this.dictionary = new HashMap<String, Word>();
 	}
 
 	public String getTrainingDirectory() {
