@@ -31,7 +31,8 @@ public class Synonymy extends SemanticFeatures implements Trainer, Tester {
 	}
 
 	@Override
-	public void test(Data data) {
+	public String test(Data data) {
+		StringBuilder builder = new StringBuilder();
 		try {
 			wordNetDictionary.open();
 			wordNetDictionary.load(true);
@@ -44,7 +45,7 @@ public class Synonymy extends SemanticFeatures implements Trainer, Tester {
 				File directoryPath = new File(
 						data.getTestingDirectory() + "\\" + directory.getName());
 				File[] files = directoryPath.listFiles();
-				System.out.print("\nTest result for directory: " + directory.getName());
+				builder.append("\nTest result for directory: " + directory.getName());
 				for (File file : files) {
 					Email email = new Email();
 					email.setEmailParameters(1, file);
@@ -69,13 +70,13 @@ public class Synonymy extends SemanticFeatures implements Trainer, Tester {
 						testSpamCount++;
 					}
 				}
-				System.out.print("\n\n Classified " + testSpamCount + " as Spam\n Classified  "
+				builder.append("\n\n Classified " + testSpamCount + " as Spam\n Classified  "
 						+ testHamCount + " as Ham\n Accuracy = ");
 				if (directory.getName().equals("spam"))
-					System.out.print(
+					builder.append(
 							(double) (testSpamCount * 100) / (testSpamCount + testHamCount) + " %");
 				else
-					System.out.print(
+					builder.append(
 							(double) (testHamCount * 100) / (testSpamCount + testHamCount) + " %");
 			}
 		} catch (IOException e) {
@@ -83,6 +84,7 @@ public class Synonymy extends SemanticFeatures implements Trainer, Tester {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		return builder.toString();
 	}
 
 	private void getSynonyms(Word word, HashMap<String, Word> dictionary) {

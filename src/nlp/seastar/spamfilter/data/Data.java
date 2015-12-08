@@ -39,19 +39,19 @@ public class Data {
 		this.trainingDirectory = trainingDirectory;
 	}
 
-	public void increamentHamEmails() {
+	public void incrementHamEmails() {
 		numOfHamEmails++;
 	}
 
-	public void increamentSpamEmails() {
+	public void incrementSpamEmails() {
 		numOfSpamEmails++;
 	}
 
-	public void increamentHamWords() {
+	public void incrementHamWords() {
 		numOfHamWords++;
 	}
 
-	public void increamentSpamWords() {
+	public void incrementSpamWords() {
 		numOfSpamWords++;
 	}
 
@@ -132,27 +132,19 @@ public class Data {
 					word.incrementHamCount();
 				else
 					word.incrementSpamCount();
-				if (isHam)
-					numOfHamWords++;
-				else
-					numOfSpamWords++;
 			} else {
 				dictionary.put(word.getWord().trim(), word);
-				if (isHam)
-					numOfHamWords++;
-				else
-					numOfSpamWords++;
 			}
-
+			if (isHam)
+				numOfHamWords++;
+			else
+				numOfSpamWords++;
 		}
-
 	}
 
 	public void computePriorProbabilities() {
-		priorHamProbability = (double) numOfHamEmails
-				/ (numOfSpamEmails + numOfHamEmails);
-		priorSpamProbablity = (double) numOfSpamEmails
-				/ (numOfSpamEmails + numOfHamEmails);
+		priorHamProbability = (double) numOfHamEmails / (numOfSpamEmails + numOfHamEmails);
+		priorSpamProbablity = (double) numOfSpamEmails / (numOfSpamEmails + numOfHamEmails);
 	}
 
 	public void verify() {
@@ -161,5 +153,4 @@ public class Data {
 		System.out.println(numOfHamWords);
 		System.out.println(numOfSpamWords);
 	}
-
 }

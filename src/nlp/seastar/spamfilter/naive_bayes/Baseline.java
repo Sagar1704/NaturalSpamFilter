@@ -45,9 +45,9 @@ public class Baseline implements Trainer, Tester {
 					Email email = new Email();
 					email.setEmailParameters(ngramCount, file);
 					if (isHam)
-						data.increamentHamEmails();
+						data.incrementHamEmails();
 					else
-						data.increamentSpamEmails();
+						data.incrementSpamEmails();
 					if (removeStopWords) {
 						email.removeStopWords(lexical);
 					}
@@ -55,14 +55,14 @@ public class Baseline implements Trainer, Tester {
 				}
 			}
 			data.computePriorProbabilities();
-			data.verify();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void test(Data data) {
+	public String test(Data data) {
+		StringBuilder builder = new StringBuilder();
 		try {
 			File testDirectory = new File(data.getTestingDirectory());
 			File[] directories = testDirectory.listFiles();
@@ -73,7 +73,7 @@ public class Baseline implements Trainer, Tester {
 				File directoryPath = new File(
 						data.getTestingDirectory() + "\\" + directory.getName());
 				File[] files = directoryPath.listFiles();
-				System.out.print("\nTest result for directory: " + directory.getName());
+				builder.append("\n\nTest result for directory: " + directory.getName());
 				for (File file : files) {
 					Email email = new Email();
 					email.computeTokens(file);
@@ -99,27 +99,27 @@ public class Baseline implements Trainer, Tester {
 						testSpamCount++;
 					}
 				}
-				System.out.print("\n\n Classified " + testSpamCount + " as Spam\n Classified  "
+				builder.append("\n\n Classified " + testSpamCount + " as Spam\n Classified  "
 						+ testHamCount + " as Ham\n Accuracy = ");
 				if (directory.getName().equals("spam"))
-					System.out.print(
+					builder.append(
 							(double) (testSpamCount * 100) / (testSpamCount + testHamCount) + " %");
 				else
-					System.out.print(
+					builder.append(
 							(double) (testHamCount * 100) / (testSpamCount + testHamCount) + " %");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return builder.toString();
 	}
-
-	public static void main(String[] args) {
-		String trainingDirectory = args[0];
-		String testDirectory = args[1];
-		System.out.print("\n\n#### NAIVE BAYES CLASSIFIER ####\n\n");
-		Baseline bayes = new Baseline(2, true);
-		Data data = new Data(trainingDirectory, testDirectory);
-		bayes.train(data);
-		bayes.test(data);
-	}
+	// public static void main(String[] args) {
+	// String trainingDirectory = args[0];
+	// String testDirectory = args[1];
+	// System.out.print("\n\n#### NAIVE BAYES CLASSIFIER ####\n\n");
+	// Baseline bayes = new Baseline(2, true);
+	// Data data = new Data(trainingDirectory, testDirectory);
+	// bayes.train(data);
+	// bayes.test(data);
+	// }
 }

@@ -98,6 +98,10 @@ public class Email {
 		}
 		return tokens;
 	}
+	
+	public void handleSwearWords(LexicalFeatures lexical) {
+		
+	}
 
 	public void setEmail(ArrayList<String> words) {
 		this.tokens = words;

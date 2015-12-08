@@ -89,10 +89,10 @@ public class LexicalFeatures {
 
 	}
 
-	public boolean isSpamPhrase(String line) {
+	public boolean isSpamPhrase(String token) {
 		if (spamPhrases != null && !spamPhrases.isEmpty()) {
 			for (String spamWord : spamPhrases) {
-				if (line.contains(spamWord))
+				if (spamWord.contains(token))
 					return true;
 			}
 		}
