@@ -15,6 +15,7 @@ import nlp.seastar.spamfilter.data.Data;
 import nlp.seastar.spamfilter.lexical.SpamPhraseHandler;
 import nlp.seastar.spamfilter.lexical.SwearWordHandler;
 import nlp.seastar.spamfilter.naive_bayes.Baseline;
+import nlp.seastar.spamfilter.naive_bayes.BayesWithPOSTagger;
 import nlp.seastar.spamfilter.semantic.Hypernymy;
 import nlp.seastar.spamfilter.semantic.Synonymy;
 
@@ -197,6 +198,9 @@ public class SpamFilterUI {
 				}
 				if (btnPosTagger.getSelection()) {
 					builder.append("\n\n#### Combining POS Tags ####");
+					BayesWithPOSTagger posTagger = new BayesWithPOSTagger();
+					posTagger.train(data);
+					builder.append(posTagger.test(data));
 					textResult.setText(builder.toString());
 				}
 				if (btnSynonymy.getSelection()) {
