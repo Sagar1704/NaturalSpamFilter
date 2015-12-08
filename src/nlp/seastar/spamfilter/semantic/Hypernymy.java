@@ -112,11 +112,10 @@ public class Hypernymy extends SemanticFeatures implements Trainer, Tester {
 			}
 		}
 	}
-
-	public static void main(String[] args) {
-		Data data = new Data(args[0], args[1]);
-		Hypernymy hypernymy = new Hypernymy();
-		hypernymy.train(data);
-		hypernymy.test(data);
-	}
+	// public static void main(String[] args) {
+	// Data data = new Data(args[0], args[1]);
+	// Hypernymy hypernymy = new Hypernymy();
+	// hypernymy.train(data);
+	// hypernymy.test(data);
+	// }
 }

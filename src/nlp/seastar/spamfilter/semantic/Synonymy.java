@@ -105,11 +105,10 @@ public class Synonymy extends SemanticFeatures implements Trainer, Tester {
 			}
 		}
 	}
-
-	public static void main(String[] args) {
-		Data data = new Data(args[0], args[1]);
-		Synonymy synonymy = new Synonymy();
-		synonymy.train(data);
-		synonymy.test(data);
-	}
+	// public static void main(String[] args) {
+	// Data data = new Data(args[0], args[1]);
+	// Synonymy synonymy = new Synonymy();
+	// synonymy.train(data);
+	// synonymy.test(data);
+	// }
 }

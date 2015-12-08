@@ -42,7 +42,6 @@ public class SwearWordHandler implements Trainer, Tester {
 						if (!word.isSpecialCharacter()) {
 							if (data.getDictionary().containsKey(token))
 								word = data.getDictionary(token);
-							
 							if (isHam) {
 								data.incrementHamWords();
 								word.incrementHamCount();
@@ -71,11 +70,10 @@ public class SwearWordHandler implements Trainer, Tester {
 	public String test(Data data) {
 		return new Baseline().test(data);
 	}
-	
-	public static void main(String[] args) {
-		Data data = new Data(args[0], args[1]);
-		SwearWordHandler swear = new SwearWordHandler();
-		swear.train(data);
-		swear.test(data);
-	}
+	// public static void main(String[] args) {
+	// Data data = new Data(args[0], args[1]);
+	// SwearWordHandler swear = new SwearWordHandler();
+	// swear.train(data);
+	// swear.test(data);
+	// }
 }

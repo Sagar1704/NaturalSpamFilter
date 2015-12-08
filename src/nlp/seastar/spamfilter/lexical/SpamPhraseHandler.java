@@ -42,7 +42,6 @@ public class SpamPhraseHandler implements Trainer, Tester {
 						if (!word.isSpecialCharacter()) {
 							if (data.getDictionary().containsKey(token))
 								word = data.getDictionary(token);
-							
 							if (isHam) {
 								data.incrementHamWords();
 								word.incrementHamCount();
@@ -116,11 +115,10 @@ public class SpamPhraseHandler implements Trainer, Tester {
 		}
 		return builder.toString();
 	}
-
-	public static void main(String[] args) {
-		Data data = new Data(args[0], args[1]);
-		SpamPhraseHandler spamHandler = new SpamPhraseHandler();
-		spamHandler.train(data);
-		spamHandler.test(data);
-	}
+	// public static void main(String[] args) {
+	// Data data = new Data(args[0], args[1]);
+	// SpamPhraseHandler spamHandler = new SpamPhraseHandler();
+	// spamHandler.train(data);
+	// spamHandler.test(data);
+	// }
 }

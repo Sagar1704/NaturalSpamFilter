@@ -60,7 +60,7 @@ public class SpamFilterUI {
 	protected void createContents() {
 		shell = new Shell(~SWT.RESIZE);
 		shell.setSize(944, 477);
-		shell.setText("SWT Application");
+		shell.setText("Natural Spam Filter");
 		Group grpBaseline = new Group(shell, SWT.BORDER | SWT.SHADOW_ETCHED_IN);
 		grpBaseline.setFont(SWTResourceManager.getFont("Segoe UI", 20, SWT.BOLD));
 		grpBaseline.setText("Baseline");
